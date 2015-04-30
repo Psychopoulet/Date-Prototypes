@@ -1,42 +1,57 @@
 
-Date.prototype.toDateSQL = function() {
+// https://github.com/Psychopoulet/Date-Prototypes/blob/master/DatePrototypes.js
 
-	var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+// from
 
-		sReturn += this.getFullYear();
-		sReturn += '-';
-		sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-		sReturn += '-';
-		sReturn += (9 < nDay) ? nDay : '0' + nDay;
+	Date.prototype.fromSQLDateTime = function(p_sSQLDateTime) {
 
-	return sReturn;
-};
+		return new Date(
+				p_sSQLDateTime.substr(0, 4), p_sSQLDateTime.substr(5, 2) - 1, p_sSQLDateTime.substr(8, 2),
+				p_sSQLDateTime.substr(11, 2), p_sSQLDateTime.substr(14, 2), p_sSQLDateTime.substr(17, 2)
+			);
 
-Date.prototype.toTimeSQL = function() {
+	};
 
-	var sReturn = '', nHours = this.getHours(), nMinutes = this.getMinutes(), nSecondes = this.getSeconds();
+// to
 
-		sReturn += (9 < nHours) ? nHours : '0' + nHours;
-		sReturn += ':';
-		sReturn += (9 < nMinutes) ? nMinutes : '0' + nMinutes;
-		sReturn += ':';
-		sReturn += (9 < nSecondes) ? nSecondes : '0' + nSecondes;
+	Date.prototype.toDateSQL = function() {
 
-	return sReturn;
-};
+		var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
 
-Date.prototype.toDateTimeSQL = function() {
+			sReturn += this.getFullYear();
+			sReturn += '-';
+			sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
+			sReturn += '-';
+			sReturn += (9 < nDay) ? nDay : '0' + nDay;
 
-	var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+		return sReturn;
+	};
 
-		sReturn += this.getFullYear();
-		sReturn += '-';
-		sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-		sReturn += '-';
-		sReturn += (9 < nDay) ? nDay : '0' + nDay;
+	Date.prototype.toTimeSQL = function() {
 
-	return this.toDateSQL() + ' ' + this.toTimeSQL();
-};
+		var sReturn = '', nHours = this.getHours(), nMinutes = this.getMinutes(), nSecondes = this.getSeconds();
+
+			sReturn += (9 < nHours) ? nHours : '0' + nHours;
+			sReturn += ':';
+			sReturn += (9 < nMinutes) ? nMinutes : '0' + nMinutes;
+			sReturn += ':';
+			sReturn += (9 < nSecondes) ? nSecondes : '0' + nSecondes;
+
+		return sReturn;
+	};
+
+	Date.prototype.toDateTimeSQL = function() {
+
+		var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+
+			sReturn += this.getFullYear();
+			sReturn += '-';
+			sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
+			sReturn += '-';
+			sReturn += (9 < nDay) ? nDay : '0' + nDay;
+
+		return this.toDateSQL() + ' ' + this.toTimeSQL();
+	};
 
 // Day
 	
