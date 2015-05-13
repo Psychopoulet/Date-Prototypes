@@ -3,56 +3,135 @@
 
 // from
 
-	Date.prototype.fromSQLDateTime = function(p_sSQLDateTime) {
+	// SQL
 
-		return new Date(
-				p_sSQLDateTime.substr(0, 4), p_sSQLDateTime.substr(5, 2) - 1, p_sSQLDateTime.substr(8, 2),
-				p_sSQLDateTime.substr(11, 2), p_sSQLDateTime.substr(14, 2), p_sSQLDateTime.substr(17, 2)
-			);
+		Date.prototype.fromSQLDate = function(p_sSQLDate) {
 
-	};
+			return new Date(
+					p_sSQLDate.substr(0, 4), p_sSQLDate.substr(5, 2) - 1, p_sSQLDate.substr(8, 2)
+				);
+
+		};
+
+		Date.prototype.fromSQLDateTime = function(p_sSQLDateTime) {
+
+			return new Date(
+					p_sSQLDateTime.substr(0, 4), p_sSQLDateTime.substr(5, 2) - 1, p_sSQLDateTime.substr(8, 2),
+					p_sSQLDateTime.substr(11, 2), p_sSQLDateTime.substr(14, 2), p_sSQLDateTime.substr(17, 2)
+				);
+
+		};
+
+	// FR
+		
+		Date.prototype.fromFRDate = function(p_sFRDate) {
+
+			return new Date(
+					p_sFRDate.substr(6, 4), p_sFRDate.substr(3, 2) - 1, p_sFRDate.substr(0, 2)
+				);
+
+		};
+
+		Date.prototype.fromFRDateTime = function(p_sFRDateTime) {
+
+			return new Date(
+					p_sFRDateTime.substr(6, 4), p_sFRDateTime.substr(3, 2) - 1, p_sFRDateTime.substr(0, 2),
+					p_sFRDateTime.substr(11, 2), p_sFRDateTime.substr(14, 2), p_sFRDateTime.substr(17, 2)
+				);
+
+		};
+
+	// EN
+		
+		Date.prototype.fromENDate = function(p_sENDate) {
+
+			return new Date(
+					p_sENDate.substr(6, 4), p_sENDate.substr(0, 2) - 1, p_sENDate.substr(3, 2)
+				);
+
+		};
+
+		Date.prototype.fromENDateDateTime = function(p_sENDateTime) {
+
+			return new Date(
+					p_sENDate.substr(6, 4), p_sENDate.substr(0, 2) - 1, p_sENDate.substr(3, 2),
+					p_sENDateTime.substr(11, 2), p_sENDateTime.substr(14, 2), p_sENDateTime.substr(17, 2)
+				);
+
+		};
 
 // to
 
-	Date.prototype.toDateSQL = function() {
+	// SQL
+		
+		Date.prototype.toDateSQL = function() {
 
-		var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+			var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
 
-			sReturn += this.getFullYear();
-			sReturn += '-';
-			sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-			sReturn += '-';
-			sReturn += (9 < nDay) ? nDay : '0' + nDay;
+				sReturn += this.getFullYear();
+				sReturn += '-';
+				sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
+				sReturn += '-';
+				sReturn += (9 < nDay) ? nDay : '0' + nDay;
 
-		return sReturn;
-	};
+			return sReturn;
+		};
 
-	Date.prototype.toTimeSQL = function() {
+		Date.prototype.toTimeSQL = function() {
 
-		var sReturn = '', nHours = this.getHours(), nMinutes = this.getMinutes(), nSecondes = this.getSeconds();
+			var sReturn = '', nHours = this.getHours(), nMinutes = this.getMinutes(), nSecondes = this.getSeconds();
 
-			sReturn += (9 < nHours) ? nHours : '0' + nHours;
-			sReturn += ':';
-			sReturn += (9 < nMinutes) ? nMinutes : '0' + nMinutes;
-			sReturn += ':';
-			sReturn += (9 < nSecondes) ? nSecondes : '0' + nSecondes;
+				sReturn += (9 < nHours) ? nHours : '0' + nHours;
+				sReturn += ':';
+				sReturn += (9 < nMinutes) ? nMinutes : '0' + nMinutes;
+				sReturn += ':';
+				sReturn += (9 < nSecondes) ? nSecondes : '0' + nSecondes;
 
-		return sReturn;
-	};
+			return sReturn;
+		};
 
-	Date.prototype.toDateTimeSQL = function() {
+		Date.prototype.toDateTimeSQL = function() {
+			return this.toDateSQL() + ' ' + this.toTimeSQL();
+		};
 
-		var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+	// FR
+		
+		Date.prototype.toDateFR = function() {
 
-			sReturn += this.getFullYear();
-			sReturn += '-';
-			sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-			sReturn += '-';
-			sReturn += (9 < nDay) ? nDay : '0' + nDay;
+			var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
 
-		return this.toDateSQL() + ' ' + this.toTimeSQL();
-	};
+				sReturn += (9 < nDay) ? nDay : '0' + nDay;
+				sReturn += '-';
+				sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
+				sReturn += '-';
+				sReturn += this.getFullYear();
 
+			return sReturn;
+		};
+
+		Date.prototype.toDateTimeFR = function() {
+			return this.toDateFR() + ' ' + this.toTimeSQL();
+		};
+
+	// EN
+		
+		Date.prototype.toDateEN = function() {
+
+			var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+
+				sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
+				sReturn += '-';
+				sReturn += (9 < nDay) ? nDay : '0' + nDay;
+				sReturn += '-';
+				sReturn += this.getFullYear();
+
+			return sReturn;
+		};
+
+		Date.prototype.toDateTimeEN = function() {
+			return this.toDateEN() + ' ' + this.toTimeSQL();
+		};
+		
 // Day
 	
 	Date.prototype.yesterday = function() {
