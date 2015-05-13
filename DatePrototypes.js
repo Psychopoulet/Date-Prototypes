@@ -101,9 +101,9 @@
 			var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
 
 				sReturn += (9 < nDay) ? nDay : '0' + nDay;
-				sReturn += '-';
+				sReturn += '/';
 				sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-				sReturn += '-';
+				sReturn += '/';
 				sReturn += this.getFullYear();
 
 			return sReturn;
@@ -120,9 +120,9 @@
 			var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
 
 				sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-				sReturn += '-';
+				sReturn += '/';
 				sReturn += (9 < nDay) ? nDay : '0' + nDay;
-				sReturn += '-';
+				sReturn += '/';
 				sReturn += this.getFullYear();
 
 			return sReturn;
