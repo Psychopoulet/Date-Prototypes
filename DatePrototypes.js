@@ -77,21 +77,24 @@
 			return sReturn;
 		};
 
-		Date.prototype.toTimeSQL = function() {
+		Date.prototype.toTimeSQL = function(p_bWithSeconds) {
 
 			var sReturn = '', nHours = this.getHours(), nMinutes = this.getMinutes(), nSecondes = this.getSeconds();
 
 				sReturn += (9 < nHours) ? nHours : '0' + nHours;
 				sReturn += ':';
 				sReturn += (9 < nMinutes) ? nMinutes : '0' + nMinutes;
-				sReturn += ':';
-				sReturn += (9 < nSecondes) ? nSecondes : '0' + nSecondes;
+
+				if ('undefined' === typeof p_bWithSeconds || p_bWithSeconds) {
+					sReturn += ':';
+					sReturn += (9 < nSecondes) ? nSecondes : '0' + nSecondes;
+				}
 
 			return sReturn;
 		};
 
-		Date.prototype.toDateTimeSQL = function() {
-			return this.toDateSQL() + ' ' + this.toTimeSQL();
+		Date.prototype.toDateTimeSQL = function(p_bWithSeconds) {
+			return this.toDateSQL() + ' ' + this.toTimeSQL(p_bWithSeconds);
 		};
 
 	// FR
@@ -109,8 +112,8 @@
 			return sReturn;
 		};
 
-		Date.prototype.toDateTimeFR = function() {
-			return this.toDateFR() + ' ' + this.toTimeSQL();
+		Date.prototype.toDateTimeFR = function(p_bWithSeconds) {
+			return this.toDateFR() + ' ' + this.toTimeSQL(p_bWithSeconds);
 		};
 
 	// EN
@@ -128,8 +131,8 @@
 			return sReturn;
 		};
 
-		Date.prototype.toDateTimeEN = function() {
-			return this.toDateEN() + ' ' + this.toTimeSQL();
+		Date.prototype.toDateTimeEN = function(p_bWithSeconds) {
+			return this.toDateEN() + ' ' + this.toTimeSQL(p_bWithSeconds);
 		};
 		
 // Day
