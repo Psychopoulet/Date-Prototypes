@@ -6,58 +6,46 @@
 	// SQL
 
 		Date.prototype.fromSQLDate = function(p_sSQLDate) {
-
 			return new Date(
 					p_sSQLDate.substr(0, 4), p_sSQLDate.substr(5, 2) - 1, p_sSQLDate.substr(8, 2)
 				);
-
 		};
 
 		Date.prototype.fromSQLDateTime = function(p_sSQLDateTime) {
-
 			return new Date(
 					p_sSQLDateTime.substr(0, 4), p_sSQLDateTime.substr(5, 2) - 1, p_sSQLDateTime.substr(8, 2),
 					p_sSQLDateTime.substr(11, 2), p_sSQLDateTime.substr(14, 2), p_sSQLDateTime.substr(17, 2)
 				);
-
 		};
 
 	// FR
 		
 		Date.prototype.fromFRDate = function(p_sFRDate) {
-
 			return new Date(
 					p_sFRDate.substr(6, 4), p_sFRDate.substr(3, 2) - 1, p_sFRDate.substr(0, 2)
 				);
-
 		};
 
 		Date.prototype.fromFRDateTime = function(p_sFRDateTime) {
-
 			return new Date(
 					p_sFRDateTime.substr(6, 4), p_sFRDateTime.substr(3, 2) - 1, p_sFRDateTime.substr(0, 2),
 					p_sFRDateTime.substr(11, 2), p_sFRDateTime.substr(14, 2), p_sFRDateTime.substr(17, 2)
 				);
-
 		};
 
 	// EN
 		
 		Date.prototype.fromENDate = function(p_sENDate) {
-
 			return new Date(
 					p_sENDate.substr(6, 4), p_sENDate.substr(0, 2) - 1, p_sENDate.substr(3, 2)
 				);
-
 		};
 
 		Date.prototype.fromENDateDateTime = function(p_sENDateTime) {
-
 			return new Date(
 					p_sENDate.substr(6, 4), p_sENDate.substr(0, 2) - 1, p_sENDate.substr(3, 2),
 					p_sENDateTime.substr(11, 2), p_sENDateTime.substr(14, 2), p_sENDateTime.substr(17, 2)
 				);
-
 		};
 
 // to
@@ -66,31 +54,33 @@
 		
 		Date.prototype.toDateSQL = function() {
 
-			var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+			var sResult = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
 
-				sReturn += this.getFullYear();
-				sReturn += '-';
-				sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-				sReturn += '-';
-				sReturn += (9 < nDay) ? nDay : '0' + nDay;
+				sResult += this.getFullYear();
+				sResult += '-';
+				sResult += (9 < nMonth) ? nMonth : '0' + nMonth;
+				sResult += '-';
+				sResult += (9 < nDay) ? nDay : '0' + nDay;
 
-			return sReturn;
+			return sResult;
+
 		};
 
 		Date.prototype.toTimeSQL = function(p_bWithSeconds) {
 
-			var sReturn = '', nHours = this.getHours(), nMinutes = this.getMinutes(), nSecondes = this.getSeconds();
+			var sResult = '', nHours = this.getHours(), nMinutes = this.getMinutes(), nSecondes = this.getSeconds();
 
-				sReturn += (9 < nHours) ? nHours : '0' + nHours;
-				sReturn += ':';
-				sReturn += (9 < nMinutes) ? nMinutes : '0' + nMinutes;
+				sResult += (9 < nHours) ? nHours : '0' + nHours;
+				sResult += ':';
+				sResult += (9 < nMinutes) ? nMinutes : '0' + nMinutes;
 
 				if ('undefined' === typeof p_bWithSeconds || p_bWithSeconds) {
-					sReturn += ':';
-					sReturn += (9 < nSecondes) ? nSecondes : '0' + nSecondes;
+					sResult += ':';
+					sResult += (9 < nSecondes) ? nSecondes : '0' + nSecondes;
 				}
 
-			return sReturn;
+			return sResult;
+
 		};
 
 		Date.prototype.toDateTimeSQL = function(p_bWithSeconds) {
@@ -101,15 +91,16 @@
 		
 		Date.prototype.toDateFR = function() {
 
-			var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+			var sResult = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
 
-				sReturn += (9 < nDay) ? nDay : '0' + nDay;
-				sReturn += '/';
-				sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-				sReturn += '/';
-				sReturn += this.getFullYear();
+				sResult += (9 < nDay) ? nDay : '0' + nDay;
+				sResult += '/';
+				sResult += (9 < nMonth) ? nMonth : '0' + nMonth;
+				sResult += '/';
+				sResult += this.getFullYear();
 
-			return sReturn;
+			return sResult;
+
 		};
 
 		Date.prototype.toDateTimeFR = function(p_bWithSeconds) {
@@ -120,15 +111,16 @@
 		
 		Date.prototype.toDateEN = function() {
 
-			var sReturn = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
+			var sResult = '', nMonth = this.getMonth() + 1, nDay = this.getDate();
 
-				sReturn += (9 < nMonth) ? nMonth : '0' + nMonth;
-				sReturn += '/';
-				sReturn += (9 < nDay) ? nDay : '0' + nDay;
-				sReturn += '/';
-				sReturn += this.getFullYear();
+				sResult += (9 < nMonth) ? nMonth : '0' + nMonth;
+				sResult += '/';
+				sResult += (9 < nDay) ? nDay : '0' + nDay;
+				sResult += '/';
+				sResult += this.getFullYear();
 
-			return sReturn;
+			return sResult;
+
 		};
 
 		Date.prototype.toDateTimeEN = function(p_bWithSeconds) {
@@ -137,10 +129,30 @@
 		
 // Day
 	
-	Date.prototype.yesterday = function() {
-		return new Date(this.getFullYear(), this.getMonth(), this.getDate() - 1, this.getHours(), this.getMinutes(), this.getSeconds(), this.getMilliseconds());
-	};
-	
+	// defined date
+
+		Date.prototype.inXDays = function(p_nXDays) {
+			return new Date(this.getFullYear(), this.getMonth(), this.getDate() + p_nXDays, this.getHours(), this.getMinutes(), this.getSeconds(), this.getMilliseconds());
+		};
+		
+		Date.prototype.XDaysAgo = function(p_nXDays) {
+			return new Date(this.getFullYear(), this.getMonth(), this.getDate() - p_nXDays, this.getHours(), this.getMinutes(), this.getSeconds(), this.getMilliseconds());
+		};
+		
+	// today
+		
+		Date.prototype.today = function() {
+			return new Date();
+		};
+		
+		Date.prototype.tomorow = function() {
+			return this.today().inXDays(1);
+		};
+		
+		Date.prototype.yesterday = function() {
+			return this.today().XDaysAgo(1);
+		};
+		
 // Week
 	
 	Date.prototype.firstDateOfTheWeek = function() {
@@ -150,9 +162,9 @@
 	};
 		
 		Date.prototype.firstDateOfTheLastWeek = function() {
-			var clReturn = this.firstDateOfTheWeek();
-				clReturn.setDate(clReturn.getDate() - 7);
-			return clReturn;
+			var clResult = this.firstDateOfTheWeek();
+				clResult.setDate(clResult.getDate() - 7);
+			return clResult;
 		};
 		
 	Date.prototype.lastDateOfTheWeek = function() {
@@ -162,9 +174,9 @@
 	};
 		
 		Date.prototype.lastDateOfTheLastWeek = function() {
-			var clReturn = this.lastDateOfTheWeek();
-				clReturn.setDate(clReturn.getDate() - 7);
-			return clReturn;
+			var clResult = this.lastDateOfTheWeek();
+				clResult.setDate(clResult.getDate() - 7);
+			return clResult;
 		};
 		
 // Month
@@ -174,10 +186,9 @@
 	};
 		
 		Date.prototype.firstDateOfTheLastMonth = function() {
-			
-			var clReturn = this.firstDateOfTheMonth();
-				clReturn.setMonth(clReturn.getMonth() - 1);
-			return clReturn;
+			var clResult = this.firstDateOfTheMonth();
+				clResult.setMonth(clResult.getMonth() - 1);
+			return clResult;
 		};
 		
 	Date.prototype.lastDateOfTheMonth = function() {
