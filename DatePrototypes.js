@@ -1,5 +1,5 @@
 
-// https://github.com/Psychopoulet/Date-Prototypes/blob/master/DatePrototypes.js
+// https://github.com/Psychopoulet/Date-Prototypes
 
 // from
 
