@@ -198,3 +198,21 @@
 		Date.prototype.lastDateOfTheLastMonth = function() {
 			return new Date(this.getFullYear(), this.getMonth(), 0, 23, 59, 59);
 		};
+		
+// Year
+	
+	Date.prototype.firstDateOfTheYear = function() {
+		return new Date(this.getFullYear(), 0, 1, 0, 0, 0, 0);
+	};
+		
+		Date.prototype.firstDateOfTheLastYear = function() {
+			return new Date(this.getFullYear() - 1, 0, 1, 0, 0, 0, 0);
+		};
+		
+	Date.prototype.lastDateOfTheYear = function() {
+		return new Date(this.getFullYear(), 11, 1, 23, 59, 59).lastDateOfTheMonth();
+	};
+		
+		Date.prototype.lastDateOfTheLastYear = function() {
+			return new Date(this.getFullYear() - 1, 11, 0, 23, 59, 59).lastDateOfTheMonth();
+		};
