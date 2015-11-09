@@ -198,21 +198,79 @@
 		Date.prototype.lastDateOfTheLastMonth = function() {
 			return new Date(this.getFullYear(), this.getMonth(), 0, 23, 59, 59);
 		};
-		
+
 // Year
-	
+
 	Date.prototype.firstDateOfTheYear = function() {
 		return new Date(this.getFullYear(), 0, 1, 0, 0, 0, 0);
 	};
-		
+
 		Date.prototype.firstDateOfTheLastYear = function() {
 			return new Date(this.getFullYear() - 1, 0, 1, 0, 0, 0, 0);
 		};
-		
+
 	Date.prototype.lastDateOfTheYear = function() {
 		return new Date(this.getFullYear(), 11, 1, 23, 59, 59).lastDateOfTheMonth();
 	};
-		
+
 		Date.prototype.lastDateOfTheLastYear = function() {
-			return new Date(this.getFullYear() - 1, 11, 0, 23, 59, 59).lastDateOfTheMonth();
+			return new Date(this.getFullYear() - 1, 11, 1, 23, 59, 59).lastDateOfTheMonth();
 		};
+
+// Diff
+
+	Date.prototype.diffInDays = function(p_clDateToCompare) {
+
+        if (p_clDateToCompare.getTime() < this.getTime()) {
+            return parseInt((this.getTime() - p_clDateToCompare.getTime()) / (24*3600*1000));
+        }
+        else if (this.getTime() < p_clDateToCompare.getTime()) {
+            return parseInt((p_clDateToCompare.getTime() - this.getTime()) / (24*3600*1000));
+        }
+        else {
+            return 0;
+        }
+
+    };
+
+    Date.prototype.diffInWeeks = function(p_clDateToCompare) {
+
+        if (p_clDateToCompare.getTime() < this.getTime()) {
+            return parseInt((this.getTime() - p_clDateToCompare.getTime()) / (24*3600*1000*7));
+        }
+        else if (this.getTime() < p_clDateToCompare.getTime()) {
+            return parseInt((p_clDateToCompare.getTime() - this.getTime()) / (24*3600*1000*7));
+        }
+        else {
+            return 0;
+        }
+
+    };
+
+    Date.prototype.diffInMonth = function(p_clDateToCompare) {
+
+        if (p_clDateToCompare.getTime() < this.getTime()) {
+            return (this.getMonth() + (12 * this.getFullYear())) - (p_clDateToCompare.getMonth() + (12 * p_clDateToCompare.getFullYear()));
+        }
+        else if (this.getTime() < p_clDateToCompare.getTime()) {
+            return (p_clDateToCompare.getMonth() + (12 * p_clDateToCompare.getFullYear())) - (this.getMonth() + (12 * this.getFullYear()));
+        }
+        else {
+            return 0;
+        }
+
+    };
+
+    Date.prototype.diffInYears = function(p_clDateToCompare) {
+
+        if (p_clDateToCompare.getTime() < this.getTime()) {
+            return this.getFullYear() - p_clDateToCompare.getFullYear();
+        }
+        else if (this.getTime() < p_clDateToCompare.getTime()) {
+            return p_clDateToCompare.getFullYear() - this.getFullYear();
+        }
+        else {
+            return 0;
+        }
+
+    };
